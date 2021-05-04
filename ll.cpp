@@ -76,6 +76,15 @@ void insertatend()
     }
     currentLastNode->next = createnode(value);
 }
+void deletelastnode()
+{
+    node *temp=head;
+    while(temp->next->next!=NULL)
+    {
+        temp=temp->next;
+    }
+    temp->next=NULL;
+}
 int main()
 {
     head = new node;
@@ -93,8 +102,8 @@ int main()
     cout << "initial :\n";
     display();
     cout << "\n";
-    deleteFirstNode();
-    cout << "After deleting first node :\n";
+    deletelastnode();
+    cout << "After deleting last node :\n";
     display();
     return 0;
 }
