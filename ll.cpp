@@ -6,7 +6,7 @@ struct node
     int data;
     struct node *next;
 };
-node* head = NULL; // Global 
+node* head = NULL; // Global
 node *createnode(int val)
 {
     node *tempNode=new node();
@@ -33,6 +33,17 @@ void insertatbeginning()
     node *initialStart = head->next;
     head->next = createnode(value);
     head->next->next = initialStart;
+}
+void deleteNnode(int N)
+{
+    node *beforedeletenode=head;
+    int ind=1;
+    while(ind<N)
+    {
+        beforedeletenode=beforedeletenode->next;
+        ind++;
+    }
+    beforedeletenode->next=beforedeletenode->next->next;
 }
 void insertAfterN(int N)
 {
@@ -102,8 +113,11 @@ int main()
     cout << "initial :\n";
     display();
     cout << "\n";
-    deletelastnode();
-    cout << "After deleting last node :\n";
+    cout<<"Enter value of n"<<"\n";
+    int N;
+    cin>>N;
+    deleteNnode(N);
+    cout << "After deleting nth node :\n";
     display();
     return 0;
 }
