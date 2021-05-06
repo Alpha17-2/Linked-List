@@ -34,6 +34,37 @@ void insertatbeginning()
     head->next = createnode(value);
     head->next->next = initialStart;
 }
+void reverseLinkedList(){
+    node* firstNode = head->next;
+    if(firstNode->next==NULL)
+    {
+        // single node
+        return;
+    }
+    if(firstNode->next->next==NULL)
+    {
+        // Two nodes
+        printf("Entering\n");
+        node *secondNode = firstNode->next;
+        secondNode->next = firstNode;
+        firstNode->next = NULL;
+        head->next = secondNode;
+        return;
+    }
+    // For more than or equal to 3 nodes
+    node *prev = firstNode;
+    node *current = prev->next;
+    prev->next = NULL;
+    while (current->next != NULL)
+    {   
+        node *tempPointer = current->next;
+        current->next = prev;
+        prev = current;
+        current = tempPointer;
+    }
+    current->next = prev;
+    head->next = current;
+}
 void deleteNnode(int N)
 {
     node *beforedeletenode=head;
@@ -113,11 +144,8 @@ int main()
     cout << "initial :\n";
     display();
     cout << "\n";
-    cout<<"Enter value of n"<<"\n";
-    int N;
-    cin>>N;
-    deleteNnode(N);
-    cout << "After deleting nth node :\n";
+    reverseLinkedList();
+    cout << "After reversing node :\n";
     display();
     return 0;
 }
